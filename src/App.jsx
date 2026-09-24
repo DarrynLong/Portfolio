@@ -40,7 +40,7 @@ function SiteLayout() {
           <div className="nav-links">
             {navigation.map(([path, label], index) => (
               <NavLink key={path} to={path} end={path === "/"}>
-                <span className="nav-index">0{index + 1}</span>{label}
+                {label}
               </NavLink>
             ))}
           </div>

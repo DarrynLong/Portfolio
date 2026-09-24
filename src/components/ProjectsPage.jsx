@@ -20,7 +20,6 @@ export default function ProjectsPage() {
             <p className="eyebrow">{project.type}</p>
             <h2>{project.title}</h2>
             <p>{project.description}</p>
-            <span className="project-arrow">↗</span>
             </div>
         </article>
         ))}

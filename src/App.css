@@ -59,7 +59,7 @@ main {
 .eyebrow {
   margin: 0 0 20px;
   color: var(--coral);
-  font: 11px var(--mono);
+  font: 13px var(--mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -116,7 +116,7 @@ p {
   flex-shrink: 0;
   text-decoration: none;
   color: var(--ink);
-  font: 10px/1.1 var(--mono);
+  font: 13px/1.1 var(--mono);
   letter-spacing: 0.08em;
 }
 
@@ -171,7 +171,7 @@ p {
   padding: 11px 12px;
   border: 1px solid transparent;
   color: #d9dfd7;
-  font: 11px var(--mono);
+  font: 13px var(--mono);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -190,10 +190,6 @@ p {
   border-color: var(--coral);
 }
 
-.nav-index {
-  color: var(--lime);
-  font-size: 9px;
-}
 
 .nav-links a:hover .nav-index,
 .nav-links a.active .nav-index {
@@ -226,7 +222,7 @@ p {
   padding: 15px 19px;
   text-decoration: none;
   cursor: pointer;
-  font: 11px var(--mono);
+  font: 12px var(--mono);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -246,7 +242,7 @@ p {
 }
 
 .text-link {
-  font: 11px var(--mono);
+  font: 13px var(--mono);
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -288,6 +284,14 @@ p {
   object-fit: cover;
   mix-blend-mode: multiply;
   filter: saturate(0.7);
+  clip-path: inset(0);
+  transition: transform 0.35s ease, filter 0.35s ease;
+  transform-origin: center;
+}
+
+.hero-art:hover img {
+  transform: scale(1.03);
+  filter: saturate(1) contrast(1.04);
 }
 
 .art-label {
@@ -297,7 +301,7 @@ p {
   padding: 14px;
   background: var(--coral);
   color: var(--paper);
-  font: 10px/1.4 var(--mono);
+  font: 12px/1.4 var(--mono);
   text-transform: uppercase;
 }
 
@@ -349,22 +353,43 @@ p {
 }
 
 .portrait-placeholder {
-  display: grid;
+  position: relative;
+  z-index: 0;
   max-width: 390px;
+  max-height: 420px;
   aspect-ratio: 4 / 5;
-  place-items: center;
-  background: repeating-linear-gradient(
-    135deg,
-    var(--lime),
-    var(--lime) 18px,
-    #b7d749 19px,
-    #b7d749 20px
-  );
-  color: var(--ink);
-  font: 700 25px/1 var(--display);
-  text-align: center;
+  overflow: visible;
 }
 
+/* Lime square behind the portrait */
+.portrait-placeholder::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  left: -22px;
+  bottom: -22px;
+  background: var(--lime);
+}
+
+
+.portrait-placeholder img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: inset(0);
+  transition: transform 0.35s ease, filter 0.35s ease;
+  transform-origin: center;
+}
+
+.portrait-placeholder:hover img {
+  transform: scale(1.03);
+  filter: saturate(1.08) contrast(1.03);
+}
 .about-copy {
   max-width: 560px;
 }
@@ -389,6 +414,13 @@ p {
 .project-card {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.22);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 8px 8px 0 var(--lime);
 }
 
 .project-card img {
@@ -396,6 +428,11 @@ p {
   width: 100%;
   aspect-ratio: 1.35;
   object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.04);
 }
 
 .project-card-body {
@@ -416,15 +453,6 @@ p {
   margin: 0;
   font-size: 14px;
   line-height: 1.6;
-}
-
-.project-arrow,
-.service-arrow {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  color: var(--coral);
-  font-size: 22px;
 }
 
 /* Timeline Section */
@@ -461,7 +489,6 @@ p {
 
 .services-list article {
   display: grid;
-  grid-template-columns: 100px 1fr 30px;
   align-items: center;
   gap: 4vw;
   padding: 30px 0;
@@ -479,6 +506,7 @@ p {
 
 .services-list h2 {
   font-size: clamp(28px, 4vw, 52px);
+  margin-top: 24px;
 }
 
 .services-list p {
@@ -494,7 +522,27 @@ p {
   align-items: start;
 }
 
+.contact-panel-wrapper {
+  position: relative;
+  min-height: 330px;
+  overflow: visible;
+}
+
+/* Lime accent behind the dark panel */
+.contact-panel-wrapper::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  left: -22px;
+  bottom: -22px;
+  background: var(--lime);
+}
+
 .contact-panel {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -525,7 +573,7 @@ p {
 }
 
 .social-links a {
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .contact-form {
@@ -545,7 +593,7 @@ p {
   flex-direction: column;
   gap: 8px;
   color: var(--muted);
-  font: 11px var(--mono);
+  font: 13px var(--mono);
   text-transform: uppercase;
 }
 
@@ -678,5 +726,14 @@ footer {
 
   footer {
     flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-art img,
+  .portrait-placeholder img,
+  .project-card,
+  .project-card img {
+    transition: none;
   }
 }

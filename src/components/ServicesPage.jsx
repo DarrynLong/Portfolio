@@ -11,7 +11,7 @@ import { services } from "../data/portfolioData";
 export default function ServicesPage() {
   return (
     <>
-      <PageIntro eyebrow="Services" title="Useful skills, thoughtfully applied." copy="A short list of the ways you can help a client, studio, or team. Keep this focused on the work you want next." />
+      <PageIntro eyebrow="Services" title="Useful skills, thoughtfully applied." copy="Helping people bring their ideas to life." />
       <section className="services-list">
         {services.map(([number, title, description]) => (
         <article key={number}>
@@ -21,7 +21,6 @@ export default function ServicesPage() {
                     <h2>{title}</h2>
                     <p>{description}</p>
                 </div>
-                <span className="service-arrow">↗</span>
             </div>
         </article>
         ))}

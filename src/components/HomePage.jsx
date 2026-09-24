@@ -17,12 +17,12 @@ export default function HomePage() {
                 <p className="hero-text">A Junior Software Engineer specializing in Game Development. I make thoughtful digital experiences where code and creativity meet.</p>
                     <div className="button-row">
                         <Link className="button button-dark" to="/projects">View selected work <span>↗</span></Link>
-                        <Link className="text-link" to="/about">More about me <span>→</span></Link>
+                        <Link className="button button-dark" to="/about">More about me <span>→</span></Link>
                     </div>
             </div>
             
             <div className="hero-art">
-                <img src="/project-images/moonbeam.png" alt="Abstract Moonbeam Games graphic" />
+                <img src="/project-images/homepageArt.png" alt="Abstract Moonbeam Games graphic" />
                 <span className="art-label">Creative practice<br />since 2021</span>
             </div>
      
