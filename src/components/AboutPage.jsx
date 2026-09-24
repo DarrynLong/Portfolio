@@ -8,7 +8,7 @@ import PageIntro from "./PageIntro";
 export default function AboutPage() {
   return (
     <>
-      <PageIntro eyebrow="About me" title="A creative technologist building interactive experiences" copy="Game programmer • Software developer • Problem solver • Creative designer" />
+      <PageIntro eyebrow="About me" title="A creative technologist building interactive experiences." copy="Game programmer • Software developer • Problem solver" />
       
       <section className="about-grid">
         <div className="portrait-placeholder">
