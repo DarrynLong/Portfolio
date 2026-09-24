@@ -239,6 +239,25 @@ p {
 .button-outline {
   margin-top: 24px;
   border: 1px solid var(--ink);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.button-outline:hover {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: var(--paper);
+}
+
+.button-outline-white {
+  margin-top: 24px;
+  border: 1px solid var(--paper);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.button-outline-white:hover {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: var(--paper);
 }
 
 .text-link {
@@ -549,6 +568,13 @@ p {
   min-height: 330px;
   padding: 36px;
   background: var(--ink);
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0,
+    transparent 22px,
+    rgba(245, 242, 234, 0.08) 22px,
+    rgba(245, 242, 234, 0.08) 24px
+  );
   color: var(--paper);
 }
 
@@ -592,7 +618,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: var(--muted);
+  color: var(--coral);
   font: 13px var(--mono);
   text-transform: uppercase;
 }

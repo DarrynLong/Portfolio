@@ -5,17 +5,32 @@
 */
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import PageIntro from "./PageIntro";
 
-// This demo captures the form interaction locally, then returns visitors home.
 export default function ContactPage() {
-  const navigate = useNavigate();
-  const [submitted, setSubmitted] = useState(false);
-  const handleSubmit = (event) => {
+  const [submissionStatus, setSubmissionStatus] = useState("idle");
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => navigate("/"), 1600);
+    const form = event.currentTarget;
+    setSubmissionStatus("sending");
+
+    try {
+      const response = await fetch("https://formspree.io/f/mwlpqryv", {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      form.reset();
+      setSubmissionStatus("success");
+    } catch {
+      setSubmissionStatus("error");
+    }
   };
 
   return (
@@ -29,8 +44,8 @@ export default function ContactPage() {
             <a href="tel:+1 437 808 2137">[+1 437 808 2137]</a>
             <p>[Toronto, Ontario]</p>
             <div className="social-links">
-              <a href="https://github.com/DarrynLong" target="_blank" rel="noreferrer">GitHub ↗</a>
-              <a href="https://www.linkedin.com/in/a-darryn-long/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+              <a className="button button-outline-white" href="https://github.com/DarrynLong" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <a className="button button-outline-white" href="https://www.linkedin.com/in/a-darryn-long/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
             </div>
           </aside>
         </div>
@@ -43,8 +58,11 @@ export default function ContactPage() {
           <label>Email address<input name="email" type="email" required placeholder="yourEmail@example.com" /></label>
           <label>Contact number<input name="phone" type="tel" placeholder="(000) 000-0000" /></label>
           <label>Message<textarea name="message" required rows="5" placeholder="Tell me a little about your project..." /></label>
-          <button className="button button-dark" type="submit">{submitted ? "Message sent" : "Send message"} <span>↗</span></button>
-          {submitted && <p className="form-note">Thanks. Your message was sent! Redirecting to Home page...</p>}
+          <button className="button button-dark" type="submit" disabled={submissionStatus === "sending"}>
+            {submissionStatus === "sending" ? "Sending..." : "Send message"} <span>↗</span>
+          </button>
+          {submissionStatus === "success" && <p className="form-note" aria-live="polite">Thanks. Your message was sent!</p>}
+          {submissionStatus === "error" && <p className="form-note" aria-live="polite">Something went wrong. Please try again or email me directly.</p>}
         </form>
       </section>
     </>
